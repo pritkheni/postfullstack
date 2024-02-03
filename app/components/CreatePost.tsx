@@ -11,7 +11,7 @@ export default function CreatePost() {
     const [id,setID] = useState<string>()
     const queryClient = useQueryClient()
     const {mutate} = useMutation({
-        mutationFn:async (title:string) => await axios.post("http://localhost:3000/api/posts/addPost",{title:title},{
+        mutationFn:async (title:string) => await axios.post("/api/posts/addPost",{title:title},{
             headers:{
                 'Content-Type':"application/json"
             }

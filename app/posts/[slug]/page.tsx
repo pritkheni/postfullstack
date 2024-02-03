@@ -15,7 +15,7 @@ type URL = {
 };
 
 const fetchPost = async (slug: string) => {
-  const response = await axios.get(`http://localhost:3000/api/posts/${slug}`);
+  const response = await axios.get(`/api/posts/${slug}`);
   return response.data;
 };
 

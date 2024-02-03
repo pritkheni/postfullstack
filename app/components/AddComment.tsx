@@ -17,7 +17,7 @@ export default function AddComment({ id }: { id?: string }) {
   const queryClient = useQueryClient();
   const { mutate } = useMutation({
     mutationFn: async (data: Comment) =>
-      await axios.post("http://localhost:3000/api/posts/addComment", {
+      await axios.post("/api/posts/addComment", {
         data,
         headers: {
           "Content-Type": "application/json",

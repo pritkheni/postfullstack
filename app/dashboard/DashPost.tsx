@@ -5,7 +5,7 @@ import React from 'react'
 import { AuthPost } from '../types/AuthPost'
 import EditPost from './EditPost'
 const getOnlyUserPost = async () => {
-    const response = await axios.get("http://localhost:3000/api/posts/authPost")
+    const response = await axios.get("/api/posts/authPost")
     return response.data
 }
 
