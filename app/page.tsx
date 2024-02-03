@@ -18,6 +18,7 @@ export default function Home() {
   return (
     <main>
       <CreatePost/>
+      
       {data?.map((post)=> <Post key={post.id} comments={post.Comment} name={post.user.name} avatar={post.user.image} postTitle={post.title} id={post.id}/>)}
     </main>
   );

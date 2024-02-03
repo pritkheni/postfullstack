@@ -1,29 +1,26 @@
 import { getServerSession } from "next-auth";
-import type { NextApiRequest, NextApiResponse } from "next";
 import { NextResponse } from "next/server";
 import { authOption } from "../../auth/[...nextauth]/options";
 import prisma from "@/app/libs/client";
-const handler = async (req: Request) => {
+const handler = async (
+  req: Request,
+  { params }: { params: { slug: string } }
+) => {
   if (req.method === "GET") {
-    console.log(`this is get method`);
-    const session = await getServerSession(authOption);
-    if (!session)
-      return NextResponse.json(
-        { message: "Please Login to add post" },
-        { status: 401 }
-      );
+    const slug = params.slug;
     try {
-      const data = await prisma.user.findUnique({
+      const data = await prisma.post.findUnique({
         where: {
-          email: session?.user?.email || "",
+          id: slug,
         },
         include: {
-          Post: {
+          user: true,
+          Comment: {
             orderBy: {
               createdAt: "desc",
             },
             include: {
-              Comment: true,
+              use: true,
             },
           },
         },
@@ -39,4 +36,4 @@ const handler = async (req: Request) => {
   }
 };
 
-export { handler as GET, handler as POST };
+export { handler as GET };
